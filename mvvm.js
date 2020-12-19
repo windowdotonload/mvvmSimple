@@ -3,6 +3,11 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 function MVVM(options) {
     this.$options = options || {};
     var data = this._data = this.$options.data;
@@ -40,6 +45,7 @@ MVVM.prototype = {
                     return me._data[key];
                 },
                 set: function proxySetter(newVal) {
+                    //这里改变了_data，data也会改变，因为data是一个对象，_data = data,操作的是同一段地址
                     me._data[key] = newVal;
                 }
             });
