@@ -20,10 +20,12 @@
  * 
  * 首先是数据代理,这一步可以直接通过vm实例调用data中的数据
  * 然后是对data中的数据进行数据劫持,即为观察者,对data中的数据重新进行定义,添加get()和set(),这一步做准备,此时还未进行模板编译
+ * 
  * 之后是进行模板解析(compile),对数据进行监视,并对data中的数据进行订阅
  * 在初次编译时,并不会产生订阅,因为此时还并没有new watcher(),dep.target为null,不会去调用dep.depend()
+ * 
  * 完成初次编译后,进行new watcher,此时才开始进行订阅,
- * 订阅的关键一点其实是Watcher对象中的get(),get()的作用是获取data中当前的值,get()是依赖于getter()方法来获取当前的值
+ * 订阅的关键一点其实是Watcher对象中的get(),get()的作用是获取data中当前的值保存到value中,get()是依赖于getter()方法来获取当前的值
  * getter()是parseGetter的返回值,是一个函数,通过call()将this指向为vm实例,
  * 而这一步就是最关键处,getter()想要获取到值,就必然会触发data中的属性的get(),那么就会调用dep.depend(),
  * 注意Dep.target在watcher的get()中指向了watcher的当前实例
