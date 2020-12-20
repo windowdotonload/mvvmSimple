@@ -40,7 +40,7 @@
  * 说到这里其实就已经完成了mvmm的部署,
  * 接下来就是数据的变化,触发data中的set()调用notify(),notify()遍历dep中的所有的依赖于这个data属性的模板,依次去调用watcher的update()
  * update()调用run(),run()里面调用最开始传入watcher的回调函数,注意这里又用到了闭包,其实本质上就是依靠闭包,一直保存着这个node节点才能完成后期的更新,后期的更新其实也是就是操作这个node节点
- * 这个回调去触发compile中的updaterFn()至此完成了数据的更新.
+ * 这个回调去触发compile中的updaterFn()至此完成了数据的更新
  * 
  */
 function MVVM(options) {
