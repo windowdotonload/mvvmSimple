@@ -30,7 +30,7 @@
  * 而这一步就是最关键处,getter()想要获取到值,就必然会触发data中的属性的get(),那么就会调用dep.depend(),
  * 注意Dep.target在watcher的get()中指向了watcher的当前实例
  * dep.depend()调用Dep.target.addDep(this),而dep.target即为当前的watcher的实例
- * watcher中的addDep又是一个关键点,是在这一步真正完成了数据的订阅,将模板添加到了dep中去
+ * watcher中的addDep又是一个关键点,是在这一步真正完成了数据的订阅,将模板（声明，指令或是模板字符串）添加到了dep中去
  * 而addDep接受的是Dep的当前实例,
  * 这里需要额外注意一下,是对data中的每一个属性都进行Object.defineProperty,这是通过在walk()中遍历object.keys()获取到的所有属性,然后通过convert()调用defineReactive()
  * mvvm中多处用到了闭包,同样的这里也是,在defineReactive中都会创建一个dep实例,,在每次对data中的一个属性进行定义时,都会定义到这个dep实力,所以其实是存在很多个dep实例
